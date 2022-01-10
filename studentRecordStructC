@@ -1,0 +1,140 @@
+package smoores_assignment1;
+
+import java.util.Scanner;
+
+public class SMoores_Assignment1 {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        
+        System.out.println("Enter month and day to find season");
+        System.out.println("Type Quit in month to quit");
+        
+        String month = "January";
+        
+        while(month.equals("Quit") == false)
+        {
+        
+            System.out.print("Month: ");
+            month = input.next();
+            
+        //Get a valid name for a month from the user
+        while(!(month.equals("January") || month.equals("February")
+                || month.equals("March") || month.equals("April") 
+                || month.equals("May") || month.equals("June") 
+                || month.equals("July") || month.equals("August") 
+                || month.equals("September") || month.equals("October") 
+                || month.equals("November") || month.equals("December")))
+                {
+                    if(month.equals("Quit"))
+                        {
+                            return;
+                        }
+                    System.out.println("Invalid");
+                    System.out.print("Month: ");
+                    month = input.next();
+                    
+                }
+        
+        //Get a day between 1 and 31
+        System.out.print("Day: ");
+        int day = input.nextInt();
+        
+        while((day < 1 || day > 31))
+        {
+            System.out.println("Invalid");
+            System.out.print("Day: ");
+            day = input.nextInt();
+        }
+        
+        //Check where each season and month correspond
+        switch(month){
+            case "January": System.out.println("Winter"); break;
+            case "February": System.out.println("Winter"); break;
+            case "March":
+                if(day < 20)
+                    System.out.println("Winter");
+                else
+                    System.out.println("Spring");
+                break;
+                        
+            case "April": System.out.println("Spring"); break;
+            case "May": System.out.println("Spring"); break;
+            case "June":
+                if(day < 20)
+                    System.out.println("Spring");
+                else
+                    System.out.println("Summer");
+                break;
+            case "July": System.out.println("Summer"); break;
+            case "August": System.out.println("Summer"); break;
+            case "September":
+                if(day < 20)
+                    System.out.println("Summer");
+                else
+                    System.out.println("Automn");
+                break;
+            case "October": System.out.println("Automn"); break;
+            case "November": System.out.println("Automn"); break;
+            case "December":
+                if(day < 20)
+                    System.out.println("Automn");
+                else
+                    System.out.println("Winter");
+        
+        }
+    }
+    return;
+}
+    
+    public static void versionOne()
+    {
+        Scanner input = new Scanner(System.in);
+        
+        System.out.println("Enter month and day to find season");
+        
+        System.out.print("Month: ");
+        String month = input.next();
+        
+        System.out.print("Day: ");
+        int day = input.nextInt();
+        
+        //Check months where season changes
+        if(month.equals("March") && (day < 20)){
+            System.out.println("Winter");
+        } else if(month.equals("March") && (day >= 20)){
+            System.out.println("Spring");
+        }
+        
+        if(month.equals("June") && (day < 20)){
+            System.out.println("Spring");
+        } else if(month.equals("June") && (day >= 20)){
+            System.out.println("Summer");
+        }
+        
+        if(month.equals("September") && (day < 21)){
+            System.out.println("Summer");
+        } else if(month.equals("September") && (day >= 21)){
+            System.out.println("Automn");
+        }
+        
+        if(month.equals("December") && (day < 21)){
+            System.out.println("Automn");
+        } else if(month.equals("December") && (day >= 21)){
+            System.out.println("Winter");
+        }
+        
+        //Check months where season doesn't change
+        switch(month){
+            case "January": System.out.println("Winter"); break;
+            case "February": System.out.println("Winter"); break;
+            case "April": System.out.println("Spring"); break;
+            case "May": System.out.println("Spring"); break;
+            case "July": System.out.println("Summer"); break;
+            case "August": System.out.println("Summer"); break;
+            case "October": System.out.println("Automn"); break;
+            case "November": System.out.println("Automn");
+        }
+    }
+    
+}
