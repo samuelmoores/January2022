@@ -1,0 +1,116 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <ctype.h>
+#include <string.h>
+
+char userInput(void);
+char computeComputerChoice(void);
+void determineWinner(char userChoice, char computerChoice); 
+void playAgain(void);
+
+char userChoice;
+
+int main ()
+{
+	srand(time(NULL));
+	
+	userInput(); //player chooses rock, paper scissor
+	
+	determineWinner(userChoice, computeComputerChoice()); //player goes against the computer, rules are applied
+	
+	playAgain(); //user can decide to keep going
+	
+	printf("Sam Moores Project 6\n");
+	
+	return 0;
+}
+
+char userInput(void)
+{
+	
+	printf("Choose r, p or s\n");
+	scanf(" %c", &userChoice); //The user picks rock, paper or scissor
+	
+	while((userChoice != 'r')&&(userChoice != 'p')&&(userChoice != 's')) //check for r, p and s
+		{
+			printf("invalid input\n");
+			printf("Choose r, p or s\n");
+			scanf(" %c", &userChoice);
+		}
+		
+	printf("User chose %c\n", userChoice);
+	
+	return userChoice;
+}
+
+char computeComputerChoice(void)
+{
+	
+	char computerChoice = (rand() % 3) + 1; //CPU gets random number from 1 to 3
+	
+	
+	if(computerChoice == 1) //cpu changes 1 to r, 2 to p and 3 to s
+		{
+			computerChoice = 'r';
+		}else if(computerChoice == 2){
+			computerChoice = 'p';
+		}else{
+			computerChoice = 's';
+		}
+	
+	printf("Computer Chose %c\n", computerChoice);
+	
+	return computerChoice;
+}
+
+void determineWinner(char userChoice, char computerChoice)
+{
+	
+	if(userChoice == 'r' && computerChoice == 'p')//the rules of the game are applied to both inputs
+	{
+		printf("You loose, paper covers rock\n");
+	}
+	else if(userChoice == 'r' && computerChoice == 's')
+	{
+		printf("You win, rock breaks scissor\n");
+	}
+	else if (userChoice == 'p' && computerChoice == 'r')
+	{
+		printf("You win, paper covers rock\n");
+	}
+	else if (userChoice == 'p' && computerChoice == 's')
+	{
+		printf("You loose, scissor cuts paper\n");
+	}
+	else if (userChoice == 's' && computerChoice == 'r')
+	{
+		printf("You loose, rock breaks scissor\n");
+	}
+	else if (userChoice == 's' && computerChoice == 'p')
+	{
+		printf("You win, scissor cuts paper\n");
+	}
+	else{
+		printf("Draw\n");
+	}
+}
+
+void playAgain(void)
+{
+	
+	int playAgain;
+	
+	printf("Play again? 1=yes 0=no\n");
+	scanf("%d", &playAgain);
+	
+	while(playAgain == 1) //User can type 1 to play again or 0 to stop
+	{
+		userInput();
+	
+		determineWinner(userChoice, computeComputerChoice());
+		
+		printf("Play again? 1=yes 0=no\n");
+		scanf("%d", &playAgain);
+	}
+}
