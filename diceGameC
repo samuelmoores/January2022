@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <ctype.h>
+#include <string.h>
+
+int main()
+{
+	int dice_1;
+	int dice_2;
+	int dice_3;
+	int dice_4;
+	int sum;
+	int point;
+	int sumLoop;
+	
+	srand(time(NULL));
+	
+	printf("\nSam Moores - Project 4\n");
+	
+	//generate two random numbers from 1-6
+	//add them together and print 
+	
+	dice_1 = rand()%(6-1+1) + 1;
+	dice_2 = rand()%(6-1+1) + 1;
+	sum = dice_1 + dice_2;
+	printf("\nPlayer Rolled: %d + %d = %d\n",dice_1, dice_2, sum);
+	
+	
+	//Player wins with 7 or 11
+	
+	if((sum == 7)||(sum==11))
+		{
+		printf("\nPlayer Wins.\n");
+		return;
+		}
+		
+	//Player looses with 2, 3 or 12	
+	
+	if((sum== 2)||(sum==3)||(sum==12))
+	{
+		printf("\nPlayer loses.\n");
+		return;
+	}
+	
+	//Roll again
+	
+	if((sum == 4)||(sum == 5)||(sum == 6)||(sum == 8)||(sum == 9)||(sum == 10))
+	{
+		printf("\nPoint is %d, the game continues!\n\n",sum);
+		point = sum;
+	} 
+	
+	while((sum != 7))
+	{
+		dice_3 = rand()%(6-1+1) + 1;
+		dice_4 = rand()%(6-1+1) + 1;
+		sum = dice_3 + dice_4;
+		printf("Player Rolled: %d + %d = %d\n",dice_3, dice_4, sum);
+		
+		//player wins if they roll the continue number 
+		
+		if((point == sum))
+		{
+			printf("\nPlayer wins.\n");
+			break;
+		}
+		
+		//Player looses if they roll 7
+		
+		if((sum == 7))
+		{
+			printf("\nPlayer loses.\n");
+			break;
+		}
+		
+	}
+	
+	printf("\nSam Moores - End of Project 4\n");
+	
+	return 0;
+}
+
+
+
+
+
+
