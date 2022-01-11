@@ -1,0 +1,26 @@
+using UnityEngine;
+
+public class Health : MonoBehaviour
+{
+    [SerializeField]
+    private int startingHealth = 5;
+
+    private int currenthHealth;
+
+    private void OnEnable()
+    {
+        currenthHealth = startingHealth;
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        currenthHealth -= damageAmount;
+        if (currenthHealth <= 0)
+            Die();
+    }
+
+    private void Die()
+    {
+        gameObject.SetActive(false);
+    }
+}
