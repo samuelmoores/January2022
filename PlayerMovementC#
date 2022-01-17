@@ -6,18 +6,25 @@ public class PlayerMovementWeimann : MonoBehaviour
 {
     private CharacterController characterController;
     private Animator animator;
-   [SerializeField] private float moveSpeed = 100f;
-   [SerializeField] private float turnSpeed = 5f;
+    
+   [SerializeField] private float forwardMoveSpeed = 20f;
+   [SerializeField] private float backwardMoveSpeed = 10;
+   [SerializeField] private float turnSpeed = 100f;
+   [SerializeField] private float sensitivity = 1f;
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
+
+        //Cursor.lockState = CursorLockMode.Locked;
     }
     private void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
+        float horizontal = Input.GetAxis("Horizontal") * sensitivity;
         float vertical = Input.GetAxis("Vertical");
+
+        bool isShooting = Input.GetButtonDown("Fire1");
 
         var movement = new Vector3(horizontal, 0, vertical);
 
@@ -27,17 +34,16 @@ public class PlayerMovementWeimann : MonoBehaviour
 
         if (vertical != 0)
         {
-            characterController.SimpleMove(transform.forward * moveSpeed * vertical);
+            float moveSpeedToUse = vertical > 0 ? forwardMoveSpeed : backwardMoveSpeed;
+            characterController.SimpleMove(transform.forward * moveSpeedToUse * vertical);
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (isShooting == true)
         {
-            animator.SetTrigger("Shoot");
+           animator.SetTrigger("Shoot");
+            
         }
-
-        
 
     }
 
-    
 }
