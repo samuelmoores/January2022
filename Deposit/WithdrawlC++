@@ -1,0 +1,47 @@
+	//Sam Moores
+	//1864262
+	//Assignment 1
+	//03/02/2022
+	//For the course's programming assignments I plan to use the Microsoft Visual C++ compiler
+	//The IDE I plan to use is Microsoft Visual Studio
+
+//Program Description 
+// This program accepts a nonzero account balance and allows a user to
+// deposit or withdrawlt. Additionally the user
+// will see their updated balance before quiting. 
+
+
+#include <iostream>
+
+int main()
+{
+	double balance = 0;
+	double input;
+
+	std::cout << "Enter in a nonzero balance: ";
+	std::cin >> balance;
+
+	do {
+		
+		std::cout << "1 for deposit 2 for withdrawl 0 to print balance and quit";
+		std::cin >> input;
+		if (input == 1)
+		{
+			double deposit;
+			std::cout << "Enter amount to deposit: ";
+			std::cin >> deposit;
+			balance += deposit;
+		}
+		else if (input == 2)
+		{
+			double withdrawl;
+			std::cout << "Enter amount to withdrawl: ";
+			std::cin >> withdrawl;
+			balance -= withdrawl;
+		}
+
+	} while (input != 0);
+
+	std::cout << balance;
+
+}
